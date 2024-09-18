@@ -6,7 +6,10 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Link from 'next/link';
 import Image from 'next/image';
-import DeleteBtn from '../DeleteBtn';
+import DeleteBtn from '../components/DeleteBtn';
+import ExportButton from '../components/ExportButton'; // นำเข้าปุ่ม Export
+import ImportButton from '../components/ImportButton'; // นำเข้าปุ่ม Import
+
 
 function CrudPage() {
   const [postData, setPostData] = useState([]);
@@ -39,6 +42,7 @@ function CrudPage() {
 
   if (!session) redirect("/login");
   console.log(session);
+  
 
   return (
     <div className='container mx-auto my-3'>
@@ -48,6 +52,12 @@ function CrudPage() {
       <button className='bg-green-500 p-3 text-white rounded'>
         <Link href="/create">Create Post</Link>
       </button>
+
+      {/* ปุ่ม Export และ Import */}
+      <div className='my-5'>
+        <ExportButton />
+        <ImportButton />
+      </div>
 
       {/* Container for posts */}
       <div className='grid grid-cols-4 gap-5 mt-3'>
